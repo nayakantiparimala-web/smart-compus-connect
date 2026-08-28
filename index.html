@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Campus Connect</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #172554;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav h2 {
+            font-size: 22px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #93c5fd;
+        }
+
+        #themeBtn {
+            background: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #172554, #2563eb);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #172554;
+            padding: 13px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* SECTION */
+        section {
+            padding: 60px 7%;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title h2 {
+            font-size: 32px;
+            color: #172554;
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h3 {
+            font-size: 35px;
+            color: #2563eb;
+        }
+
+        /* FACILITIES */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #172554;
+        }
+
+        /* NOTICE */
+        .notice-box {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .notice {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        /* SEARCH */
+        .search-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-area input {
+            width: 80%;
+            max-width: 600px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        /* FEEDBACK */
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        form textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        form button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* DARK MODE */
+        .dark {
+            background: #111827;
+            color: white;
+        }
+
+        .dark .card,
+        .dark .stat-card,
+        .dark .notice,
+        .dark form {
+            background: #1f2937;
+            color: white;
+        }
+
+        .dark .title h2,
+        .dark .card h3 {
+            color: #93c5fd;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <h2>🎓 Smart Campus</h2>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#notices">Notices</a></li>
+            <li><a href="#feedback">Feedback</a></li>
+        </ul>
+
+        <button id="themeBtn">🌙</button>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div>
+            <h1>Welcome to Smart Campus Connect</h1>
+
+            <p>
+                Empowering Students • Inspiring Innovation • Building the Future
+            </p>
+
+            <a href="#facilities" class="btn">
+                Explore Campus
+            </a>
+        </div>
+    </section>
+
+
+    <!-- STATISTICS -->
+    <section>
+        <div class="title">
+            <h2>Our Campus at a Glance</h2>
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3 class="counter">12</h3>
+                <p>Departments</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 class="counter">1500</h3>
+                <p>Students</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 class="counter">100</h3>
+                <p>Faculty</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 class="counter">25</h3>
+                <p>Clubs & Events</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FACILITIES -->
+    <section id="facilities">
+
+        <div class="title">
+            <h2>Campus Facilities</h2>
+            <p>Everything students need in one place</p>
+        </div>
+
+        <div class="search-area">
+            <input
+                type="text"
+                id="search"
+                placeholder="🔎 Search facility..."
+            >
+        </div>
+
+        <div class="cards" id="facilityCards">
+
+            <div class="card">
+                <div class="icon">📚</div>
+                <h3>Central Library</h3>
+                <p>Books, digital resources and study spaces.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💻</div>
+                <h3>Computer Labs</h3>
+                <p>Modern computer laboratories for practical learning.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔬</div>
+                <h3>Science Labs</h3>
+                <p>Well-equipped laboratories for experiments.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🏃</div>
+                <h3>Sports Ground</h3>
+                <p>Facilities for sports and physical activities.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🍴</div>
+                <h3>Canteen</h3>
+                <p>Food and refreshments for students and staff.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🚌</div>
+                <h3>Transportation</h3>
+                <p>College bus services connecting nearby areas.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- NOTICES -->
+    <section id="notices">
+
+        <div class="title">
+            <h2>📢 Latest Notices</h2>
+        </div>
+
+        <div class="notice-box">
+
+            <div class="notice">
+                <strong>College Event</strong>
+                <p>Annual College Fest registrations are now open.</p>
+            </div>
+
+            <div class="notice">
+                <strong>Examination</strong>
+                <p>Internal examination schedule will be announced soon.</p>
+            </div>
+
+            <div class="notice">
+                <strong>Workshop</strong>
+                <p>Technical workshop for students is coming soon.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEEDBACK -->
+    <section id="feedback">
+
+        <div class="title">
+            <h2>💬 Student Feedback</h2>
+            <p>Share your suggestions with us</p>
+        </div>
+
+        <form id="feedbackForm">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <textarea
+                id="message"
+                placeholder="Write your feedback..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Submit Feedback
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Smart Campus Connect</p>
+        <p>Designed using HTML • CSS • JavaScript</p>
+    </footer>
+
+
+    <script>
+
+        // DARK MODE
+        const themeBtn = document.getElementById("themeBtn");
+
+        themeBtn.addEventListener("click", function () {
+
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                themeBtn.innerText = "☀️";
+            } else {
+                themeBtn.innerText = "🌙";
+            }
+
+        });
+
+
+        // FACILITY SEARCH
+        const search = document.getElementById("search");
+        const cards = document.querySelectorAll(".card");
+
+        search.addEventListener("keyup", function () {
+
+            const value = search.value.toLowerCase();
+
+            cards.forEach(function(card) {
+
+                const text = card.innerText.toLowerCase();
+
+                if (text.includes(value)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+        });
+
+
+        // FEEDBACK FORM
+        const form = document.getElementById("feedbackForm");
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+
+            alert(
+                "Thank you, " + name +
+                "! Your feedback has been submitted successfully."
+            );
+
+            form.reset();
+
+        });
+
+    </script>
+
+</body>
+</html>
